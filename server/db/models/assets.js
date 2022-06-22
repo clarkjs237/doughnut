@@ -5,11 +5,12 @@ const db = require('../index.js');
 const AssetSchema = mongoose.Schema({
   name: String, // Bitcoin, Apple Inc., etc
   class: String, // crypto, stocks, nfts, etc.
-  currPrice: Number, // current price
-  amount: Number, // amount currently held
-  notes: String, // any notes about this item, PW, where stored etc
-  ticker: String, // BTC, ETH, AAPL
-  logo: String // this is a url to the image for it's logo
+  currPrice: {type: Number, default: null}, // current price
+  amount: {type: Number, default: null}, // amount currently held
+  notes: {type: String, default: ""}, // any notes about this item, PW, where stored etc
+  ticker: {type: String, default: ""}, // BTC, ETH, AAPL
+  logo: {type: String, default: "default url"}, // this is a url to the image for it's logo
+  historical: {type: Array, default: []} // this will hold all of the historical data
 });
 
 const Assets = mongoose.model('Assets', AssetSchema);

@@ -11,7 +11,7 @@ const port = 3001;
 const app = express();
 app.use(express.json());
 
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
 app.get('/assets', (req, res) => {
@@ -149,19 +149,17 @@ async function finn() {
 // Polygon for historical data
 async function historical() {
   const symbol = 'AAPL';
-  let data = await fetch(`https://eodhistoricaldata.com/api/eod/MCD.US?api_token=${process.env.EOD_API}&period=d&fmt=json&order=d&from=2022-06-07&to=2022-06-20`)
+  let data = await fetch(`https://eodhistoricaldata.com/api/eod/MCD.US?api_token=${process.env.EOD_API}&period=d&fmt=json&order=d&from=2020-12-31&to=2022-06-22`)
   data = data.json();
   return data;
 }
 
 app.get('/hello', (req, res) => {
-  console.log('i am here')
-  res.send('HELLO!')
   // gecko()
   // geckoHist()
-  // finn()
+  finn()
   // historical()
-  // .then((result) => res.send(result))
+  .then((result) => res.send(result))
 })
 
 
