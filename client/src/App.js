@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
 
-  async function tester() {
-    let data = await fetch('/test').then((data) => data.json());
-    console.log(data);
-  }
+  // async function tester() {
+  //   let data = await fetch('/test').then((data) => data.json());
+  //   console.log(data);
+  // }
 
 
-  useEffect(() => {
-    tester()
-  }, []);
+  // useEffect(() => {
+  //   tester()
+  // }, []);
 
   return (
     <div className="App">
