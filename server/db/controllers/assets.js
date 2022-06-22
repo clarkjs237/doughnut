@@ -83,21 +83,18 @@ exports.addToDb = async (input) => {
     // Update the input price to be this
     input.currPrice = price;
 
-    // Also want an if statement here to get the historical data
-    // If input.historical === undefined, get the data and put it in here
-    // result.data.prices is an array that we will want to store
-    const crypto_hist = await cryptoHist(input.name);
-    // Set historical to equal this array of arrays
-    input.historical = crypto_hist;
+    // COMMENTED OUT IS UPDATING THE HISTORICAL PRICE
+    // THIS IS AN EXPENSIVE OPERATION SO DON'T DO IT VERY OFTEN
+    // const crypto_hist = await cryptoHist(input.name);
+    // input.historical = crypto_hist;
   } else {
-    // This is where the stock market information will go
-    // In here, I'm not going to do any calls. I will preload the
-    // DB with the historical data so I don't need to worry about it
-    // const historical_stock = await historicalStock(input.ticker);
-    // input.historical = historical_stock;
-
     const curr_stock_price = await currentStock(input.ticker);
     input.currPrice = curr_stock_price.c;
+
+    // COMMENTED OUT IS UPDATING THE HISTORICAL PRICE
+    // THIS IS AN EXPENSIVE OPERATION SO DON'T DO IT VERY OFTEN
+    // const historical_stock = await historicalStock(input.ticker);
+    // input.historical = historical_stock;
   }
 
   // This updates the input based on the name of the asset, like 'bitcoin' or 'ethereum'
