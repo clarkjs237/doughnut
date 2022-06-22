@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 function App() {
@@ -20,15 +20,9 @@ function App() {
   return (
     <div className="App">
       hello
+      <Button colorScheme='blue'>Button</Button>
     </div>
   );
-  // return (
-  //   <ChakraProvider>
-  //     <div>
-  //       Hello
-  //     </div>
-  //   </ChakraProvider>
-  // )
 }
 
 export default App;
