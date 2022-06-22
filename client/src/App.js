@@ -6,9 +6,6 @@ import React, { useEffect, useState } from 'react';
 function App() {
 
   async function tester() {
-    // fetch('/test')
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data))
     let data = await fetch('/test').then((data) => data.json());
     console.log(data);
   }
