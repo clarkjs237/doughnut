@@ -7,20 +7,23 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
 
-  // async function tester() {
-  //   let data = await fetch('/test').then((data) => data.json());
-  //   console.log(data);
-  // }
+  const [assets, setAssets] = useState({})
+
+  async function getAssets() {
+    const data = await fetch('/assets').then((val) => val.json());
+    console.log(data);
+  }
 
 
-  // useEffect(() => {
-  //   // tester()
-  // }, []);
+  useEffect(() => {
+    const data = getAssets();
+    setAssets(data);
+  }, []);
 
   return (
     <div className="App">
       hello
-      <Button colorScheme='blue'>Button</Button>
+      <Button colorScheme='blue' size='lg'>Button</Button>
     </div>
   );
 }
