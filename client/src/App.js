@@ -46,7 +46,7 @@ function App() {
           <Accordion defaultIndex={[0]} allowMultiple>
             {/* This is what I want to map over for the accordian items */}
             {assets.map((asset, index) => (
-              <AccordionItem>
+              <AccordionItem key={index}>
                 <h2>
                   <AccordionButton>
                     <Box flex='1' textAlign='left' display="flex">

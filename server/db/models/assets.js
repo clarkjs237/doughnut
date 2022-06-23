@@ -10,7 +10,9 @@ const AssetSchema = mongoose.Schema({
   notes: {type: String, default: ""}, // any notes about this item, PW, where stored etc
   ticker: {type: String, default: ""}, // BTC, ETH, AAPL
   logo: {type: String, default: "default url"}, // this is a url to the image for it's logo
-  historical: {type: Array, default: []} // this will hold all of the historical data
+  historical: {type: Array, default: []}, // this will hold all of the historical data
+  color: {type: String, default: "color"}, // this is the color for the pie chart and graphs
+  display_name: {type: String, default: "disp"}
 });
 
 const Assets = mongoose.model('Assets', AssetSchema);
