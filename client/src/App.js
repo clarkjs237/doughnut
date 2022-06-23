@@ -64,7 +64,6 @@ function App() {
   }
 
   function handleSubmit(index, e) {
-    console.log('hello')
     // I want to submit this to the db as an updated value for this assets name
     // I think I only need the asset name, amount, ticker, class
     const updatedAsset = {
@@ -80,6 +79,7 @@ function App() {
       },
       body: JSON.stringify(updatedAsset)
     })
+    .then(() => refreshSubmit())
   }
 
   async function refreshSubmit() {
@@ -89,11 +89,21 @@ function App() {
     setAssets(data)
   }
 
+  // This is for the modal. I want to take this newly created asset and post it to the db
   async function addAsset(asset) {
     // This should trigger refreshSubmit above after it is done posting
+    // I need to change the asset.amount to be a number, so parse float
     asset.amount = parseFloat(asset.amount)
     console.log(asset)
-    // I need to change the asset.amount to be a number, so parse float
+    fetch('/assets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(asset)
+    })
+    .then(() => refreshSubmit())
+
   }
 
   return (

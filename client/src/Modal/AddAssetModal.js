@@ -54,7 +54,7 @@ export default function AddAssetModal({ addAsset }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Add New Asset</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
