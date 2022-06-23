@@ -49,10 +49,9 @@ function App() {
               <AccordionItem>
                 <h2>
                   <AccordionButton>
-                    <Box flex='1' textAlign='left'>
-                      {/* <img src={asset.logo} alt="" /> */}
+                    <Box flex='1' textAlign='left' display="flex">
                       <LogoImage src={asset.logo} alt="" />
-                      <p>{asset.name} {asset.currPrice} {asset.ticker} {asset.amount} Total Amount Owned: ${Math.round((asset.currPrice * asset.amount) * 100) / 100}</p>
+                      <p>{asset.name} Current Price: ${asset.currPrice} Amount Owned: {asset.amount} Total Value: ${Math.round((asset.currPrice * asset.amount) * 100) / 100}</p>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
