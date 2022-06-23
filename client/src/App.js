@@ -30,6 +30,13 @@ const LogoImage = styled.img`
   min-width: 2rem;
 `;
 
+const DoughnutImage = styled.img`
+  max-height: 6rem;
+  min-height: 6rem;
+  max-width: 6rem;
+  min-width: 6rem;
+`;
+
 const AssetItems = styled.div`
   /* background-color: red; */
   display: flex;
@@ -47,6 +54,24 @@ const NameTotalValue = styled.div`
   display: flex;
   justify-content: space-between;
   width: 34rem;
+`;
+
+const ModalWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const TextH3 = styled.span`
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+`;
+
+const AmountOwnedWrapper = styled.div`
+  display: flex;
+`;
+
+const TopWrapper = styled.div`
+  display: flex;
+  margin-top: 2.5rem;
 `;
 
 function App() {
@@ -121,8 +146,14 @@ function App() {
     <Center>
       {assets.length > 0 && (
         <div>
-          <Heading>Rendezvous</Heading>
-          <PieChart assets={assets}/>
+
+          <TopWrapper>
+            <PieChart assets={assets}/>
+            <TextH3 style={{"fontSize": "4rem", "marginRight": "0.5rem"}}>Doughnut</TextH3>
+            <DoughnutImage src='https://cdn2.iconfinder.com/data/icons/cute-valentine-s-hand-drawn/512/template_line_set-32-512.png'/>
+          </TopWrapper>
+
+
           <MidSectionDiv>
             <Flex>
               <Box>
@@ -146,10 +177,10 @@ function App() {
 
                           <NameTotalValue>
                             <LogoImage src={asset.logo} alt="" />
-                            {/* <p>{asset.display_name}</p> */}
-                            <Heading size='sm'>{asset.display_name}</Heading>
-                            <Heading size='sm'>Total Value: ${(Math.round((asset.currPrice * asset.amount) * 100) / 100).toLocaleString("en-US")}</Heading>
-                            {/* <p>Total Value: ${(Math.round((asset.currPrice * asset.amount) * 100) / 100).toLocaleString("en-US")}</p> */}
+                            <TextH3 style={{"fontSize": "19px", "fontWeight": "550"}}>{asset.display_name}</TextH3>
+                            <TextH3 style={{"fontSize": "20px", "fontWeight":"500"}}>
+                              ${(Math.round((asset.currPrice * asset.amount) * 100) / 100).toLocaleString("en-US")}
+                            </TextH3>
                           </NameTotalValue>
 
                         </Box>
@@ -157,16 +188,22 @@ function App() {
                       </AccordionButton>
                     </AssetItems>
                     <AccordionPanel pb={4} mg={0.25}>
-                      Current Price: ${(asset.currPrice).toLocaleString("en-US")}
-                      Amount Owned: {asset.amount} {asset.ticker}
-                      Notes: {asset.notes}
-                      <p>Amount Owned</p>
 
-                      <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)}>
-                        <EditablePreview />
-                        <EditableInput onChange={(e) => changer(index, e)}/>
-                        <Button colorScheme='teal' size='xs'>Update Amount</Button>
-                      </Editable>
+                      <ModalWrapper>
+                        <TextH3 style={{"fontWeight": "bold"}}>Current Price: <br/>${(asset.currPrice).toLocaleString("en-US")}</TextH3>
+                        <TextH3>Notes: <br/>{asset.notes}</TextH3>
+
+                        <AmountOwnedWrapper>
+                          <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)} >
+                            <EditablePreview />
+                            <EditableInput onChange={(e) => changer(index, e)} />
+                            <TextH3 style={{"padding-right": "1rem"}}> {asset.ticker}</TextH3>
+                            <Button colorScheme='teal' size='xs'>Update Amount</Button>
+                          </Editable>
+                        </AmountOwnedWrapper>
+
+                      </ModalWrapper>
+
 
                     </AccordionPanel>
                   </h2>
