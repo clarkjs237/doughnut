@@ -28,6 +28,7 @@ import styled from 'styled-components';
 
 import PieChart from './Graphs/PieChart.js';
 import EditForm from './EditForm/EditForm.js';
+import AddAssetModal from './Modal/AddAssetModal.js';
 
 const LogoImage = styled.img`
   max-height: 2rem;
@@ -82,10 +83,15 @@ function App() {
   }
 
   async function refreshSubmit() {
-    // console.log('refresh') this is where I will make a request to get all the assets and reset state
+    // this is where I will make a request to get all the assets and reset state
     const data = await fetch('/assets/refresh').then((val) => val.json());
     // update the assets
     setAssets(data)
+  }
+
+  async function addAsset() {
+    // This should trigger refreshSubmit above after it is done posting
+    console.log('add asset')
   }
 
   return (
@@ -95,6 +101,7 @@ function App() {
         <div>
           <PieChart assets={assets}/>
           <Button size='lg' colorScheme='blue' onClick={refreshSubmit}>Refresh</Button>
+          <AddAssetModal addAsset={addAsset} />
           <Accordion defaultIndex={[0]} allowMultiple>
             {/* This is what I want to map over for the accordian items */}
             {assets.map((asset, index) => (

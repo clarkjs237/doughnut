@@ -4,7 +4,7 @@ require("dotenv").config({
   path: path.join(__dirname,'..','.env.file'),
 });
 
-const { getAll, addToDb, deleteFromDb } = require('./db/controllers/assets.js');
+const { getAll, addToDb, deleteFromDb, refreshCurrentPrices } = require('./db/controllers/assets.js');
 
 const port = 3001;
 

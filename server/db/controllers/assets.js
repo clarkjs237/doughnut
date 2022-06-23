@@ -105,6 +105,43 @@ exports.addToDb = async (input) => {
 }
 
 
+exports.refreshCurrentPrices = async () => {
+  // I want to read all of the contents of the db and update each one with the current price
+  // I could read the whole db, then using that result, loop through and do the functionality above, and update these values
+  const assets = await Assets.find({});
+
+  await Promise.all(assets.map(async (asset) => {
+    if (asset.class === 'crypto') {
+      // I want to get the current price of this asset from coingecko
+      const crpyto_data = await currentCrpytoPrice(asset.name);
+      const price = crpyto_data.data[asset.name].usd;
+
+      // Update the input price to be this
+      asset.currPrice = price;
+
+      // COMMENTED OUT IS UPDATING THE HISTORICAL PRICE
+      // THIS IS AN EXPENSIVE OPERATION SO DON'T DO IT VERY OFTEN
+      // const crypto_hist = await cryptoHist(input.name);
+      // input.historical = crypto_hist;
+    } else {
+      const curr_stock_price = await currentStock(asset.ticker);
+      asset.currPrice = curr_stock_price.c;
+
+      // COMMENTED OUT IS UPDATING THE HISTORICAL PRICE
+      // THIS IS AN EXPENSIVE OPERATION SO DON'T DO IT VERY OFTEN
+      // const historical_stock = await historicalStock(input.ticker);
+      // input.historical = historical_stock;
+    }
+
+    // This updates the input based on the name of the asset, like 'bitcoin' or 'ethereum'
+    // If it doesn't exist, it creates a new entry for this asset
+    await Assets.findOneAndUpdate({name: asset.name}, {...asset}, {new: true, upsert: true});
+  }))
+
+  const data = await this.getAll();
+  return data;
+}
+
 
 //            DELETE (not really delete, just set amount to 0 and filter out)
 // ----------------------------------------------------------------------
