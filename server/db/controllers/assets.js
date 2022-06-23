@@ -51,7 +51,7 @@ async function currentCrpytoPrice(asset) {
 // Get the historical data from CoinGecko
 async function cryptoHist(asset) {
   const data = await CoinGeckoClient.coins.fetchMarketChart(asset, {
-    days: 7
+    days: 365
   })
 
   return data.data.prices;

@@ -11,7 +11,18 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 
+// // Trying visx
+// import { Pie } from '@visx/shape';
+// import { Group } from '@visx/group';
+// import { Text } from '@visx/text';
 
+// const coins = [
+//   {symbol: "ADA", amount: 200, color: "#0033ad", usd: 1.48},
+//   {symbol: "SOL", amount: 5, color: "#00ffbd", usd: 37.6},
+//   {symbol: "BTC", amount: 0.005, color: "#F7931A", usd: 37474}
+// ]
+
+import PieChart from './Graphs/PieChart.js';
 
 const LogoImage = styled.img`
   max-height: 2rem;
@@ -43,6 +54,7 @@ function App() {
       <Heading>Rendezvous</Heading>
       {assets.length > 0 && (
         <div>
+          <PieChart assets={assets}/>
           <Accordion defaultIndex={[0]} allowMultiple>
             {/* This is what I want to map over for the accordian items */}
             {assets.map((asset, index) => (
@@ -65,9 +77,7 @@ function App() {
         </div>
       )}
     </div>
-
   );
-
 
 }
 
