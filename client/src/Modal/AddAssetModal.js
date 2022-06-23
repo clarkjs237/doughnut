@@ -31,39 +31,26 @@ const nameAndTicker = {
 
 export default function AddAssetModal({ addAsset }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [state, setState] = useState({
+  const [asset, setAsset] = useState({
     name: "",
     ticker: "",
     amount: 0,
     notes: ""
   })
 
-
-  function tickerFinder(name) {
-    if (nameAndTicker[name]) {
-      setState({
-        ...state,
-        ticker: nameAndTicker[name]
-      })
+  function handleChange(e) {
+    if (e.target.name === 'name') {
+      let ticker = "";
+      if (nameAndTicker[e.target.value.toLowerCase()]) {
+        ticker = nameAndTicker[e.target.value.toLowerCase()];
+        setAsset({...asset, [e.target.name]: e.target.value, ticker: ticker})
+      } else {
+        setAsset({...asset, [e.target.name]: e.target.value, ticker: ticker})
+      }
     } else {
-      setState({
-        ...state,
-        ticker: ""
-      })
+      setAsset({...asset, [e.target.name]: e.target.value })
     }
   }
-
-  function handleChange(e) {
-    let asset = e.target.value.toLowerCase();
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
-
-    tickerFinder(e.target.value)
-
-  }
-
 
   return (
     <>
@@ -76,20 +63,19 @@ export default function AddAssetModal({ addAsset }) {
           <ModalCloseButton />
           <ModalBody>
             Fill out the provided fields
-            <Input placeholder='Asset Name, ex: Bitcoin, Apple'mb={4} name='name' onChange={handleChange}/>
+            <Input placeholder='Asset Name, ex: Bitcoin, Apple'mb={4} name='name' onChange={handleChange} type='text' />
             <InputGroup>
-            <Input placeholder='Amount Owned, ex: 0.75' mb={4} name='amount'/>
-            <InputRightAddon  children={state.ticker} />
+              <Input placeholder='Amount Owned, ex: 0.75' mb={4} name='amount' onChange={handleChange} type='number'/>
+              <InputRightAddon  children={asset.ticker} />
             </InputGroup>
-            <Input placeholder='Amount Owned, ex: 0.75' mb={4} />
-            <Input placeholder='Notes, ex: "Stored on Coinbase"' mb={4} />
+            <Input placeholder='Notes, ex: "Stored on Coinbase"' mb={4} name='notes' onChange={handleChange}/>
           </ModalBody>
           <ModalFooter>
             <Button
               size='md'
               colorScheme='blue'
               onClick={() => {
-                addAsset()
+                addAsset(asset)
                 onClose()
               }}>Add Asset</Button>
           </ModalFooter>

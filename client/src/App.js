@@ -89,9 +89,11 @@ function App() {
     setAssets(data)
   }
 
-  async function addAsset() {
+  async function addAsset(asset) {
     // This should trigger refreshSubmit above after it is done posting
-    console.log('add asset')
+    asset.amount = parseFloat(asset.amount)
+    console.log(asset)
+    // I need to change the asset.amount to be a number, so parse float
   }
 
   return (
