@@ -11,12 +11,15 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 
+
+
 const LogoImage = styled.img`
   max-height: 2rem;
   max-width: 2rem;
   min-height: 2rem;
   min-width: 2rem;
 `;
+
 
 function App() {
 
@@ -59,23 +62,6 @@ function App() {
                 </h2>
               </AccordionItem>
             ))}
-            {/* <AccordionItem>
-              <h2>
-                <AccordionButton>
-                  <Box flex='1' textAlign='left'>
-                    <img src={assets[0].logo} alt="" />
-                    <p>{assets[0].name}</p>
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo consequat.
-                </AccordionPanel>
-              </h2>
-            </AccordionItem> */}
           </Accordion>
         </div>
       )}
