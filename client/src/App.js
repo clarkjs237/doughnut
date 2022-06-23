@@ -8,6 +8,10 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Editable,
+  EditableInput,
+  EditableTextarea,
+  EditablePreview,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 
@@ -23,6 +27,7 @@ import styled from 'styled-components';
 // ]
 
 import PieChart from './Graphs/PieChart.js';
+import EditForm from './EditForm/EditForm.js';
 
 const LogoImage = styled.img`
   max-height: 2rem;
@@ -48,6 +53,40 @@ function App() {
     .catch((err) => console.log(err))
   }, []);
 
+  function changer(index, e) {
+    // index is the index of the asset we are changing
+    let assets_copy = [...assets];
+    assets_copy[index].amount = e.target.value;
+    setAssets(assets_copy);
+    // This works! I think I would rather have a submit button bc that way it won't update unless I want it to
+
+  }
+
+  function handleSubmit(index, e) {
+    console.log('hello')
+    // I want to submit this to the db as an updated value for this assets name
+    // I think I only need the asset name, amount, ticker, class
+    const updatedAsset = {
+      name: assets[index].name,
+      ticker: assets[index].ticker,
+      amount: assets[index].amount,
+      class: assets[index].class
+    }
+    fetch('/assets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedAsset)
+    })
+  }
+
+  async function refreshSubmit() {
+    // console.log('refresh') this is where I will make a request to get all the assets and reset state
+    const data = await fetch('/assets/refresh').then((val) => val.json());
+    // update the assets
+    setAssets(data)
+  }
 
   return (
     <div>
@@ -55,6 +94,7 @@ function App() {
       {assets.length > 0 && (
         <div>
           <PieChart assets={assets}/>
+          <Button size='lg' colorScheme='blue' onClick={refreshSubmit}>Refresh</Button>
           <Accordion defaultIndex={[0]} allowMultiple>
             {/* This is what I want to map over for the accordian items */}
             {assets.map((asset, index) => (
@@ -69,6 +109,14 @@ function App() {
                   </AccordionButton>
                   <AccordionPanel pb={4}>
                     {asset.notes}
+                    <p>Amount Owned</p>
+
+                    <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)}>
+                      <EditablePreview />
+                      <EditableInput onChange={(e) => changer(index, e)}/>
+                      <Button>Update Amount</Button>
+                    </Editable>
+
                   </AccordionPanel>
                 </h2>
               </AccordionItem>

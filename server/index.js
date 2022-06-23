@@ -33,6 +33,13 @@ app.delete('/assets', (req, res) => {
   .catch((err) => console.log(err))
 })
 
+app.get('/assets/refresh', (req, res) => {
+  // this is where I want to refresh the current prices for each one of the assets in the db
+  refreshCurrentPrices()
+  .then((result) => res.send(result))
+  .catch((err) => console.log(err))
+})
+
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);

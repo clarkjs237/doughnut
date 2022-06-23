@@ -74,7 +74,6 @@ async function currentStock(asset) {
 }
 
 exports.addToDb = async (input) => {
-
   if (input.class === 'crypto') {
     // I want to get the current price of this asset from coingecko
     const crpyto_data = await currentCrpytoPrice(input.name);
