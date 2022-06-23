@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
+  ButtonGroup,
   Heading,
   Accordion,
   AccordionItem,
@@ -12,22 +13,14 @@ import {
   EditableInput,
   EditableTextarea,
   EditablePreview,
+  Center,
+  Container,
+  Flex,
+  Spacer
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 
-// // Trying visx
-// import { Pie } from '@visx/shape';
-// import { Group } from '@visx/group';
-// import { Text } from '@visx/text';
-
-// const coins = [
-//   {symbol: "ADA", amount: 200, color: "#0033ad", usd: 1.48},
-//   {symbol: "SOL", amount: 5, color: "#00ffbd", usd: 37.6},
-//   {symbol: "BTC", amount: 0.005, color: "#F7931A", usd: 37474}
-// ]
-
 import PieChart from './Graphs/PieChart.js';
-import EditForm from './EditForm/EditForm.js';
 import AddAssetModal from './Modal/AddAssetModal.js';
 
 const LogoImage = styled.img`
@@ -37,6 +30,24 @@ const LogoImage = styled.img`
   min-width: 2rem;
 `;
 
+const AssetItems = styled.div`
+  /* background-color: red; */
+  display: flex;
+  flex-direction: horizontal;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+`;
+
+const MidSectionDiv = styled.div`
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+`;
+
+const NameTotalValue = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 34rem;
+`;
 
 function App() {
 
@@ -107,43 +118,65 @@ function App() {
   }
 
   return (
-    <div>
-      <Heading>Rendezvous</Heading>
+    <Center>
       {assets.length > 0 && (
         <div>
+          <Heading>Rendezvous</Heading>
           <PieChart assets={assets}/>
-          <Button size='lg' colorScheme='blue' onClick={refreshSubmit}>Refresh</Button>
-          <AddAssetModal addAsset={addAsset} />
+          <MidSectionDiv>
+            <Flex>
+              <Box>
+                <Heading size='lg'>Assets</Heading>
+              </Box>
+              <Spacer />
+              <ButtonGroup gap='2'>
+                <Button size='md' colorScheme='teal' onClick={refreshSubmit}>Refresh</Button>
+                <AddAssetModal addAsset={addAsset} />
+              </ButtonGroup>
+            </Flex>
+          </MidSectionDiv>
           <Accordion defaultIndex={[0]} allowMultiple>
-            {/* This is what I want to map over for the accordian items */}
-            {assets.map((asset, index) => (
-              <AccordionItem key={index}>
-                <h2>
-                  <AccordionButton>
-                    <Box flex='1' textAlign='left' display="flex">
-                      <LogoImage src={asset.logo} alt="" />
-                      <p>{asset.name} Current Price: ${asset.currPrice} Amount Owned: {asset.amount} Total Value: ${Math.round((asset.currPrice * asset.amount) * 100) / 100}</p>
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                  <AccordionPanel pb={4}>
-                    {asset.notes}
-                    <p>Amount Owned</p>
+            <Container>
+              {assets.map((asset, index) => (
+                <AccordionItem key={index} minWidth={600} maxWidth={600}>
+                  <h2>
+                    <AssetItems>
+                      <AccordionButton>
+                        <Box flex='1' textAlign='left' display="flex">
 
-                    <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)}>
-                      <EditablePreview />
-                      <EditableInput onChange={(e) => changer(index, e)}/>
-                      <Button>Update Amount</Button>
-                    </Editable>
+                          <NameTotalValue>
+                            <LogoImage src={asset.logo} alt="" />
+                            {/* <p>{asset.display_name}</p> */}
+                            <Heading size='sm'>{asset.display_name}</Heading>
+                            <Heading size='sm'>Total Value: ${(Math.round((asset.currPrice * asset.amount) * 100) / 100).toLocaleString("en-US")}</Heading>
+                            {/* <p>Total Value: ${(Math.round((asset.currPrice * asset.amount) * 100) / 100).toLocaleString("en-US")}</p> */}
+                          </NameTotalValue>
 
-                  </AccordionPanel>
-                </h2>
-              </AccordionItem>
-            ))}
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </AssetItems>
+                    <AccordionPanel pb={4} mg={0.25}>
+                      Current Price: ${(asset.currPrice).toLocaleString("en-US")}
+                      Amount Owned: {asset.amount} {asset.ticker}
+                      Notes: {asset.notes}
+                      <p>Amount Owned</p>
+
+                      <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)}>
+                        <EditablePreview />
+                        <EditableInput onChange={(e) => changer(index, e)}/>
+                        <Button colorScheme='teal' size='xs'>Update Amount</Button>
+                      </Editable>
+
+                    </AccordionPanel>
+                  </h2>
+                </AccordionItem>
+              ))}
+            </Container>
           </Accordion>
         </div>
       )}
-    </div>
+    </Center>
   );
 
 }

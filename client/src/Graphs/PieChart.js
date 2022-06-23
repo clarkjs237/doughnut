@@ -41,21 +41,21 @@ export default function PieChart({ assets }) {
 
           {active ? (
             <>
-              <Text textAnchor="middle" fontSize={40} dy={-20}>
+              <Text textAnchor="middle" fontSize={40} dy={-5}>
                 {`$${(Math.floor(active.amount * active.currPrice)).toLocaleString("en-US")}`}
               </Text>
 
-              <Text textAnchor="middle" fill={active.color} fontSize={20} dy={20}>
+              <Text textAnchor="middle" fill={active.color} fontSize={20} dy={35}>
                 {`${(active.amount).toLocaleString("en-US")} ${active.ticker}`}
               </Text>
             </>
           ) : (
             <>
-              <Text textAnchor="middle" fontSize={40} dy={-20}>
+              <Text textAnchor="middle" fontSize={40} dy={-5}>
                 {`$${(Math.floor(assets.reduce((acc, asset) => acc + asset.amount*asset.currPrice ,0))).toLocaleString("en-US")}`}
               </Text>
 
-              <Text textAnchor="middle" fontSize={20} dy={20}>
+              <Text textAnchor="middle" fontSize={20} dy={35}>
                 {`${assets.length} Assets`}
               </Text>
             </>

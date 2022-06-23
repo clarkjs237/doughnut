@@ -54,9 +54,9 @@ export default function AddAssetModal({ addAsset }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Add New Asset</Button>
+      <Button onClick={onOpen} size='md' colorScheme='teal'>Add New Asset</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Asset</ModalHeader>
@@ -73,7 +73,7 @@ export default function AddAssetModal({ addAsset }) {
           <ModalFooter>
             <Button
               size='md'
-              colorScheme='blue'
+              colorScheme='teal'
               onClick={() => {
                 addAsset(asset)
                 onClose()
