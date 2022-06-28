@@ -21,6 +21,7 @@ import {
 import styled from 'styled-components';
 
 import PieChart from './Graphs/PieChart.js';
+import AssetValue from './Graphs/AssetValue.js';
 import AddAssetModal from './Modal/AddAssetModal.js';
 
 const LogoImage = styled.img`
@@ -149,8 +150,14 @@ function App() {
 
           <TopWrapper>
             <PieChart assets={assets}/>
-            <TextH3 style={{"fontSize": "4rem", "marginRight": "0.5rem"}}>Doughnut</TextH3>
-            <DoughnutImage src='https://cdn2.iconfinder.com/data/icons/cute-valentine-s-hand-drawn/512/template_line_set-32-512.png'/>
+            <Flex flexDirection='column'>
+              <Flex>
+                <TextH3 style={{"fontSize": "4rem", "marginRight": "0.5rem"}}>Doughnut</TextH3>
+                <DoughnutImage src='https://cdn2.iconfinder.com/data/icons/cute-valentine-s-hand-drawn/512/template_line_set-32-512.png'/>
+              </Flex>
+            {/* This is where the graph will go */}
+              <AssetValue />
+            </Flex>
           </TopWrapper>
 
 
@@ -197,7 +204,7 @@ function App() {
                           <Editable defaultValue={asset.amount} onSubmit={(e) => handleSubmit(index, e)} >
                             <EditablePreview />
                             <EditableInput onChange={(e) => changer(index, e)} />
-                            <TextH3 style={{"padding-right": "1rem"}}> {asset.ticker}</TextH3>
+                            <TextH3 style={{"paddingRight": "1rem"}}> {asset.ticker}</TextH3>
                             <Button colorScheme='teal' size='xs'>Update Amount</Button>
                           </Editable>
                         </AmountOwnedWrapper>
