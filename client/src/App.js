@@ -156,7 +156,7 @@ function App() {
                 <DoughnutImage src='https://cdn2.iconfinder.com/data/icons/cute-valentine-s-hand-drawn/512/template_line_set-32-512.png'/>
               </Flex>
             {/* This is where the graph will go */}
-              <AssetValue />
+              <AssetValue assets={assets}/>
             </Flex>
           </TopWrapper>
 

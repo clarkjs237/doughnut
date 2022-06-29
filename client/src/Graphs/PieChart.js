@@ -10,6 +10,14 @@ export default function PieChart({ assets }) {
   const width = 250;
   const half = width / 2;
 
+  const [totalValue, setTotalValue] = useState(null);
+
+  useEffect(() => {
+    setTotalValue(Math.floor(assets.reduce((acc, asset) => acc + asset.amount*asset.currPrice ,0)))
+  }, [assets])
+
+
+  if (!totalValue) return <div>Loading...</div>
 
   return (
     <main>
@@ -45,14 +53,19 @@ export default function PieChart({ assets }) {
                 {`$${(Math.floor(active.amount * active.currPrice)).toLocaleString("en-US")}`}
               </Text>
 
-              <Text textAnchor="middle" fill={active.color} fontSize={20} dy={35}>
+              <Text textAnchor="middle" fill={active.color} fontSize={25} dy={25}>
                 {`${(active.amount).toLocaleString("en-US")} ${active.ticker}`}
+              </Text>
+
+              <Text textAnchor="middle" fill={active.color} fontSize={15} dy={45}>
+                {`${Math.round(((active.amount * active.currPrice / totalValue) * 100) * 10) / 10}%`}
               </Text>
             </>
           ) : (
             <>
               <Text textAnchor="middle" fontSize={40} dy={-5}>
-                {`$${(Math.floor(assets.reduce((acc, asset) => acc + asset.amount*asset.currPrice ,0))).toLocaleString("en-US")}`}
+                {/* {`$${(Math.floor(assets.reduce((acc, asset) => acc + asset.amount*asset.currPrice ,0))).toLocaleString("en-US")}`} */}
+                {`$${totalValue.toLocaleString("en-US")}`}
               </Text>
 
               <Text textAnchor="middle" fontSize={20} dy={35}>
