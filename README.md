@@ -1,6 +1,5 @@
 # mvp Project
 
-![](https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif | width=300)
-
-<img src="https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif" width="400" height="400" />
+![Alt Text](https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif)
+<img src="https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif" width="auto" height="400" />
 
