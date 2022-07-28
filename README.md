@@ -5,7 +5,7 @@
 
 ## Description
 
-The purpose of this application was to demonstrate my full-stack abilities by completing a personal project in 48 hours. Doughnut is what I was able to come up with. Simply, it is a way to visualize real-time price information of select digital assets and stocks. 
+The purpose of this application was to demonstrate my full-stack abilities by completing a personal project in 48 hours. Doughnut is what I was able to come up with. Simply, it is a way to visualize real-time price information of select digital assets and stocks from a portfolio. 
 
 ### There are 5 main features of the application:
 
@@ -43,3 +43,7 @@ The purpose of this application was to demonstrate my full-stack abilities by co
 Javascript, MongoDB, Express, React, Node
 ## Libraries
 Chakra UI, Styled-Components, Visx, React-Chart-JS
+
+## Future Improvments
+1. Use Firebase to introduce authentication for individual users
+2. Connect Firebase to connect Coinbase and other leading trading platforms for real portfolio data
