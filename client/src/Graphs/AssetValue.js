@@ -69,7 +69,7 @@ export default function AssetValue({ assets }) {
       } else {
         // process this is stock way
         // need to iterate in reverse to get old to new
-        console.log(asset.name)
+        // console.log(asset.name)
         let datesArr = [];
         for (let i = 99; i >= 0; i--) {
           const price = asset.historical[i].close;
@@ -87,6 +87,8 @@ export default function AssetValue({ assets }) {
         [asset.name]: output
       }));
     })
+
+    await valuesToOne();
   }
 
   async function valuesToOne() {
@@ -116,7 +118,7 @@ export default function AssetValue({ assets }) {
 
   async function grouper() {
     await valueGraph();
-    await valuesToOne();
+    // await valuesToOne();
   }
 
   useEffect(() => {
