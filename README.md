@@ -2,8 +2,7 @@
 
 <img src="https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif" width="auto" height="350" />
 
-<iframe src="https://giphy.com/embed/3pDJ5SchdCs3xn5JS9" width="480" height="432" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/3pDJ5SchdCs3xn5JS9">via GIPHY</a></p>
-
+<img src="https://media.giphy.com/media/3pDJ5SchdCs3xn5JS9/giphy.gif" width="auto" height="350" />
 
 ## Description
 
