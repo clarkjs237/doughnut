@@ -37,3 +37,9 @@ The purpose of this application was to demonstrate my full-stack abilities by co
 3. yarn install
 4. yarn build
 5. yarn run start
+
+
+## Tech Stack
+Javascript, MongoDB, Express, React, Node
+## Libraries
+Chakra UI, Styled-Components, Visx, React-Chart-JS
