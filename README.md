@@ -1,4 +1,7 @@
 # Doughnut Finance
+
+### An easy way to visually understand the breakdown of your stock and crypto portfolio holdings 
+
 <div style={{display:"flex"}}>
    <img src="https://media.giphy.com/media/UHPLDRjopUi04VtRjH/giphy.gif" width="auto" height="350" />
    <img src="https://media.giphy.com/media/3pDJ5SchdCs3xn5JS9/giphy.gif" width="auto" height="350" />
